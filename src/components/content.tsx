@@ -1,0 +1,8 @@
+import Link from 'next/link';
+import Image from 'next/image';
+import {ArrowUpRight,Newspaper} from 'lucide-react';
+import type {Content} from '@/lib/data';
+import {formatNewsDate} from '@/lib/date-format';
+export function Empty({title='Aún no hay noticias.',description='Cuando el equipo editorial publique noticias, aparecerán aquí automáticamente.'}:{title?:string;description?:string}){return <div className="empty"><div className="empty-icon"><Newspaper size={32}/></div><span className="eyebrow">SIN RESULTADOS</span><h3>{title}</h3><p>{description}</p><Link className="text-link" href="/contacto">Contactar al equipo <ArrowUpRight size={16}/></Link></div>}
+export function Cards({items,emptyTitle,emptyDescription}:{items:Content[];emptyTitle?:string;emptyDescription?:string}){if(!items.length)return <Empty title={emptyTitle} description={emptyDescription}/>;return <div className="cards">{items.map(x=><article className="story-card" key={x.id}><Link href={`/noticias/${x.slug}`} className="story-img">{x.cover_url?<Image src={x.cover_url} fill sizes="(max-width: 800px) 100vw, 400px" alt={x.title}/>:<div className="story-placeholder"><Newspaper size={54}/></div>}</Link><div className="story-meta"><span>{x.categories?.name||'NOTICIAS'}</span><span>·</span><span>{formatNewsDate(x.published_at)}</span></div><h3><Link href={`/noticias/${x.slug}`}>{x.title}</Link></h3><p>{x.subtitle}</p><Link className="story-more" href={`/noticias/${x.slug}`}>Leer noticia <ArrowUpRight size={17}/></Link></article>)}</div>}
+export function SectionTitle({number,title,href}:{number:string;title:string;href:string}){return <div className="section-title"><h2><span>{number} /</span> {title}</h2><Link href={href}>VER TODO <ArrowUpRight size={17}/></Link></div>}

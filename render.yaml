@@ -1,0 +1,25 @@
+# Configuración opcional Blueprint en Render (New > Blueprint).
+# La web requiere un Web Service, NO un Static Site ni output: export.
+services:
+  - type: web
+    name: recuperemos-nuevo-leon
+    runtime: node
+    plan: free # Pruebas: en producción conviene una instancia de pago sin suspensión por inactividad.
+    buildCommand: npm install && npm run build
+    startCommand: npm run start -- -H 0.0.0.0 -p $PORT
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: 22
+      - key: NEXT_PUBLIC_SITE_URL
+        sync: false
+      - key: NEXT_PUBLIC_SUPABASE_URL
+        sync: false
+      - key: NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY
+        sync: false
+      - key: SUPABASE_SECRET_KEY
+        sync: false
+      - key: NEXT_PUBLIC_TURNSTILE_SITE_KEY
+        sync: false
+      - key: TURNSTILE_SECRET_KEY
+        sync: false

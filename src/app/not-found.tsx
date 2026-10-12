@@ -1,0 +1,2 @@
+import Link from 'next/link';
+export default function NotFound(){return <div className="container" style={{padding:'100px 20px'}}><span className="eyebrow">ERROR 404</span><h1 style={{fontFamily:'Barlow Condensed,Impact,sans-serif',fontSize:'clamp(60px,10vw,140px)',margin:'15px 0'}}>PÁGINA NO ENCONTRADA.</h1><p>La dirección que buscas no está disponible.</p><Link className="button button-dark" href="/">VOLVER AL INICIO ↗</Link></div>}
